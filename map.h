@@ -16,7 +16,7 @@ typedef struct {
 void map_init(map_t *map, cmp_func_t cmp);
 void map_init_full(map_t *map, cmp_func_t cmp, free_func_t key_destroy, free_func_t value_destroy);
 
-void map_add(map_t *map, void *key, void *value);
+bool map_add(map_t *map, void *key, void *value);
 void *map_find(map_t *map, void *key);
 bool map_lookup(map_t *map, void *key, void **orig_key, void **orig_value);
 

@@ -15,7 +15,7 @@ typedef struct {
 void tree_init(tree_t *tree, cmp_func_t cmp);
 void tree_init_full(tree_t *tree, cmp_func_t cmp, free_func_t destroy);
 
-void tree_add(tree_t *tree, const void *key);
+bool tree_add(tree_t *tree, const void *key);
 void *tree_find(tree_t *tree, const void *key);
 bool tree_remove(tree_t *tree, const void *key);
 

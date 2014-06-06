@@ -61,18 +61,24 @@ void map_init_full(map_t *map, cmp_func_t cmp, free_func_t key_destroy, free_fun
 	map->value_destroy = value_destroy;
 }
 
-void map_add(map_t *map, void *key, void *value)
+bool map_add(map_t *map, void *key, void *value)
 {
+	bool is_new_item = true;
+
 	map_entry_t entry = { key, NULL };
 
 	void **node = call_tfunc(map, &entry, tsearch);
 
 	assert(node);
 
-	if (*node != &entry)
+	if (*node != &entry) {
 		map_entry_free(map, *node);
+		is_new_item = false;
+	}
 
 	*node = map_entry_new(key, value);
+
+	return is_new_item;
 }
 
 void *map_find(map_t *map, void *key)

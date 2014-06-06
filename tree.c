@@ -19,8 +19,10 @@ void tree_init_full(tree_t *tree, cmp_func_t cmp, free_func_t destroy)
 	tree->destroy = destroy;
 }
 
-void tree_add(tree_t *tree, const void *key)
+bool tree_add(tree_t *tree, const void *key)
 {
+	bool is_new_item = true;
+
 	void **node = tsearch(key, &tree->root, tree->cmp);
 
 	assert(node);
@@ -30,7 +32,10 @@ void tree_add(tree_t *tree, const void *key)
 			tree->destroy(*node);
 
 		*node = (void *) key;
+		is_new_item = false;
 	}
+
+	return is_new_item;;
 }
 
 void *tree_find(tree_t *tree, const void *key)

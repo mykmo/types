@@ -63,7 +63,7 @@ void map_init_full(map_t *map, cmp_func_t cmp, free_func_t key_destroy, free_fun
 
 void map_add(map_t *map, void *key, void *value)
 {
-	map_entry_t entry = { key, value };
+	map_entry_t entry = { key, NULL };
 
 	void **node = call_tfunc(map, &entry, tsearch);
 

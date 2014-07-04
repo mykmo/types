@@ -48,7 +48,7 @@ void *tree_find(tree_t *tree, const void *key)
 bool tree_remove(tree_t *tree, const void *key)
 {
 	if (! tree->destroy)
-		return ! tdelete(key, &tree->root, tree->cmp);
+		return tdelete(key, &tree->root, tree->cmp) != NULL;
 
 	void **node = tfind(key, &tree->root, tree->cmp);
 
